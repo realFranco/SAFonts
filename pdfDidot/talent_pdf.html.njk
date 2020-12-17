@@ -1,0 +1,144 @@
+{# SYSTEM Agency (c) 2020
+Template - Talent - PDF Content  
+
+Dev: franco@systemagency.com | giorgia@systemagency.com #}
+
+<html>
+  <head>
+    <title>SYSTEM Agency</title>
+    {# <link href="http://localhost:7000/assets/fonts/pdf.css" rel="stylesheet"> #}
+
+    <meta charset="utf-8">
+        <style>
+        @import {
+            src:  url('https://api.systemagency.com/assets/fonts/pdf.css');
+            {# src:  url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@1,100;1,700&display=swap'); #}
+        }
+
+        p {
+            font-family: 'Roboto', sans-serif;
+            text-align: center;
+            font-style: italic;
+        }
+         
+        img{
+            width: 95px;
+            max-width: 100%;
+            min-width: 25px;
+            height: auto;
+        }
+
+        .both_imgs{
+            width: 325px;
+            height: 438px;
+            background-size: cover;
+        }
+
+        .wide_img{
+            width: 735px;
+            height: 427px;
+            {# background-size: cover; #}
+            background-size: 720px;
+        }
+
+        .main_top_logo{
+            width: 90px;
+            margin-top: 15px;
+        }
+
+        .top_logo{
+            width: 90px;
+            margin-top: 24px;
+            margin-bottom: -7px;
+        }
+
+        .name_measure{
+            width: 100%;
+        }
+
+        .name{
+            font-size: 20px;
+        }
+
+        .measurements{
+            font-size: 9px;
+        }
+
+        .images_container{
+            margin-top: 25px;
+            margin-bottom: 20px;
+            margin-left: 55px;
+            margin-right: 55px;
+        }
+    </style>
+    </head>
+  <body>
+        {% set n = files | length %}
+        {% set page = 0 %}
+        {% for i in range(0, n) -%}
+            {% set i = i + page %}
+
+            {% if i < n %}
+                <table align="center">
+                    <tr>
+                        <td>
+                            <img class={{ "main_top_logo" if i == 0 else "top_logo" }} 
+                                src="https://cdn.systemagency.com/assets/images/SA_small.jpeg"/>
+                        </td>
+                    </tr>
+                </table>
+                <table class="images_container" align="center">
+                    <tr>
+                        {% set wide = files[i].width / files[i].height > 1.00 %}
+                        {% if i + 1 < n %}
+                            {% set wide_next = files[i+1].width / files[i+1].height > 1.00 %}
+                        {% endif %}
+                        
+                        {% if not wide and not wide_next and (i + 1) < n %}
+                            <td class="both_imgs" style="background-position: 75%;  
+                                background-image: url( {{ src_root }}{{ files[i].route }} );" ></td>
+
+                            <td style="padding: 35px;"></td>
+
+                            <td class="both_imgs" style="background-position: 10%; 
+                                background-image: url( {{ src_root }}{{ files[i+1].route }} );" ></td>
+                            {% set page = page + 1 %}
+                        {% else %}
+                            <td class={{ "wide_img" if wide or wide_next else "both_imgs" }}  
+                                style="background-image: 
+                                    url( {{ src_root }}{{ files[i].route }} );">
+                            </td>
+                        {% endif %} 
+                    </tr>
+                </table>
+                
+                <table class="name_measure">
+                    <tr>
+                        <td>
+                            <p class="name">
+                                <b style="text-transform: uppercase;">
+                                    {{ name }} 
+                                </b>
+                                {{ last_name }}
+                            </p>
+                        
+                            <p class="measurements">
+                                <b>HEIGHT</b>   {{ height }} 
+                                <b>BUST</b>     {{ bust }}
+                                <b>WAIST</b>    {{ waist }} 
+                                <b>HIPS</b>     {{ hips }} 
+                                <b>SHOES</b>    {{ shoes }}
+                                {% if eyes %}
+                                    <b>EYES</b>     {{ eyes }}
+                                {% endif %}
+                                {% if hair %}
+                                    <b>HAIR</b>     {{ hair }}
+                                {% endif %}
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            {% endif %}
+        {%- endfor %}
+  </body>
+</html>
