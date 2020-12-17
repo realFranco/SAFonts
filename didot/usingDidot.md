@@ -1,0 +1,40 @@
+
+
+<link
+      href="https://fonts.googleapis.com/css2?family=GFS+Didot&amp;display=swap"
+      rel="stylesheet"
+    />
+
+Este link  (https://fonts.googleapis.com/css2?family=GFS+Didot&amp;display=swap) muestra esto:
+
+/* greek */
+@font-face {
+  font-family: 'GFS Didot';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/gfsdidot/v10/Jqzh5TybZ9vZMWFssvwSE-3HJSA.woff2) format('woff2');
+  unicode-range: U+0370-03FF;
+}
+
+Y así es como llegué a usarlo.
+
+<div class="col-sm 6">
+                    <section class="pt-2">
+                        <div
+                          class="w-full container mx-auto px-10 sm:px-6 md:px-32"
+                          style="min-height: 341px"
+                        >
+                          <p class="mt-8 text-justify didot" style="font-size: 20px">
+                            Font: Didot
+                          </p>
+                          <p class="mt-8 text-justify didot" style="font-size: 20px">
+                            Founded in 2009: SYSTEM’s ethos for iconic excellence in talent
+                            management, public relations, and creative innovation runs in
+                            alignment with the vision of co-founder, John Casablancas, after he
+                            built Elite Model Management and the supermodel careers of Gisele
+                            Bündchen, Carol Alt, Linda Evangelista, Cindy Crawford, Naomi
+                            Campbell, Stephanie Seymour, Heidi Klum, and Claudia Schiffer.
+                          </p>
+                        </div>
+                      </section>
+                </div>
